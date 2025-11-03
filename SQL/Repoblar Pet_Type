@@ -1,0 +1,10 @@
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE fact_adopciones 
+SET Pet_Type = CASE 
+    WHEN Type = 1 THEN 'Perro' 
+    WHEN Type = 2 THEN 'Gato' 
+    ELSE 'Desconocido' 
+END;
+
+SET SQL_SAFE_UPDATES = 1;
