@@ -1,0 +1,11 @@
+SELECT 
+    dim_breeds.BreedName AS Raza,
+    SUM(CASE WHEN fact_adopciones.Pet_Type = 'Gato' THEN 1 ELSE 0 END) AS Gatos,
+    SUM(CASE WHEN fact_adopciones.Pet_Type = 'Perro' THEN 1 ELSE 0 END) AS Perros,
+    COUNT(*) AS TOTAL_MASCOTAS_RESCATADAS
+FROM fact_adopciones
+INNER JOIN dim_breeds ON fact_adopciones.Breed1 = dim_breeds.BreedID
+WHERE fact_adopciones.Breed1 IS NOT NULL
+GROUP BY dim_breeds.BreedName
+ORDER BY COUNT(*) DESC
+LIMIT 15;
